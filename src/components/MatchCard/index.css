@@ -1,0 +1,35 @@
+/* Write your CSS here */
+.match-card {
+  list-style-type: none;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #0f172a;
+  border-radius: 10px;
+  font-family: 'Bree Serif';
+  width: 31%;
+  color: #ffffff;
+  margin-bottom: 10px;
+}
+.lose-style {
+  color: #e31a1a;
+  font-size: 20px;
+}
+.won-style {
+  color: #18ed66;
+  font-size: 20px;
+}
+.team-title {
+  text-align: center;
+}
+
+.result {
+  text-align: center;
+}
+@media (max-width: 768px) {
+  .match-card {
+    width: 46%;
+  }
+}

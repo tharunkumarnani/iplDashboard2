@@ -1,0 +1,35 @@
+/* Write your CSS here */
+.ipl-teams {
+  background-color: #ffffff30;
+  border-radius: 10px;
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 49%;
+  margin-bottom: 10px;
+  cursor: pointer;
+  height: 25vh;
+}
+.team-logo {
+  width: 28%;
+  height: 90%;
+}
+.team-heading {
+  flex-grow: 1;
+  color: #ffffff;
+  font-family: 'Bree Serif';
+  outline: none;
+  text-align: center;
+  font-size: 30px;
+}
+@media (max-width: 768px) {
+  .team-heading {
+    font-size: 20px;
+  }
+  .team-logo {
+    width: 55%;
+    height: 70%;
+  }
+}
