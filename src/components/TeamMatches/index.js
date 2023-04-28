@@ -3,7 +3,6 @@ import {Component} from 'react'
 import Loader from 'react-loader-spinner'
 import LatestMatch from '../LatestMatch'
 import MatchCard from '../MatchCard'
-import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css'
 import './index.css'
 
 class TeamMatches extends Component {
@@ -18,6 +17,20 @@ class TeamMatches extends Component {
     this.getIndividualTeamDetails()
   }
 
+  getFormattedData = data => ({
+    id: data.id,
+    competingTeam: data.competing_team,
+    competingTeamLogo: data.competing_team_logo,
+    date: data.date,
+    firstInnings: data.first_innings,
+    manOfTheMatch: data.man_of_the_match,
+    matchStatus: data.match_status,
+    result: data.result,
+    secondInnings: data.second_innings,
+    umpires: data.umpires,
+    venue: data.venue,
+  })
+
   getIndividualTeamDetails = async () => {
     const {match} = this.props
     const {params} = match
@@ -31,28 +44,28 @@ class TeamMatches extends Component {
     }
     const {teamBannerUrl} = updatedData
     let {latestMatchDetails} = updatedData
-    latestMatchDetails = {
-      id: latestMatchDetails.id,
-      competingTeam: latestMatchDetails.competing_team,
-      competingTeamLogo: latestMatchDetails.competing_team_logo,
-      date: latestMatchDetails.date,
-      firstInnings: latestMatchDetails.first_innings,
-      manOfTheMatch: latestMatchDetails.man_of_the_match,
-      matchStatus: latestMatchDetails.match_status,
-      result: latestMatchDetails.result,
-      secondInnings: latestMatchDetails.second_innings,
-      umpires: latestMatchDetails.umpires,
-      venue: latestMatchDetails.venue,
-    }
+    latestMatchDetails = this.getFormattedData(latestMatchDetails)
+
     const {recentMatches} = updatedData
+    const formatedRecentMatches = recentMatches.map(each =>
+      this.getFormattedData(each),
+    )
+
+    console.log(formatedRecentMatches)
 
     this.setState({
       isLoading: false,
       teamBanner: teamBannerUrl,
       latestMatches: latestMatchDetails,
-      recentMatchesList: recentMatches,
+      recentMatchesList: formatedRecentMatches,
     })
   }
+
+  getRenderCont = () => (
+    <div data-testid="loader">
+      <Loader type="Oval" color="#ffffff" height={50} width={50} />
+    </div>
+  )
 
   render() {
     const {match} = this.props
@@ -63,9 +76,7 @@ class TeamMatches extends Component {
     return (
       <div className={`list-team-cont ${id}`}>
         {isLoading ? (
-          <div testId="loader">
-            <Loader type="Oval" color="#ffffff" height={50} width={50} />
-          </div>
+          this.getRenderCont()
         ) : (
           <div className="team-card">
             <img className="team-banner" src={teamBanner} alt="team banner" />

@@ -24,6 +24,12 @@ class Home extends Component {
     this.setState({isLoading: false, teamsList: updatedData})
   }
 
+  getRenderCont = () => (
+    <div data-testid="loader">
+      <Loader type="Oval" color="#ffffff" height={50} width={50} />
+    </div>
+  )
+
   render() {
     const {isLoading, teamsList} = this.state
     return (
@@ -37,9 +43,7 @@ class Home extends Component {
           <h1 className="heading">IPL Dashboard</h1>
         </div>
         {isLoading ? (
-          <div testId="loader">
-            <Loader type="Oval" color="#ffffff" height={50} width={50} />
-          </div>
+          this.getRenderCont()
         ) : (
           <ul className="ipl-lists">
             {teamsList.map(each => (

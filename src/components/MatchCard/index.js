@@ -3,24 +3,21 @@ import './index.css'
 
 const MatchCard = props => {
   const {cardDetails} = props
-  const {
-    competing_team_logo,
-    competing_team,
-    result,
-    match_status,
-  } = cardDetails
-  const matchStatusClass = match_status === 'Lost' ? 'lose-style' : 'won-style'
+  console.log(cardDetails)
+  const {competingTeamLogo, competingTeam, result, matchStatus} = cardDetails
+  console.log(competingTeamLogo)
+  const matchStatusClass = matchStatus === 'Lost' ? 'lose-style' : 'won-style'
   return (
     <li className="match-card">
       <img
         className="team-logo"
-        src={competing_team_logo}
-        alt={`competing Team ${competing_team}`}
+        src={competingTeamLogo}
+        alt={`competing team ${competingTeam}`}
       />
-      <p className="team-title">{competing_team}</p>
+      <p className="team-title">{competingTeam}</p>
 
       <p className="result">{result}</p>
-      <p className={matchStatusClass}>{match_status}</p>
+      <p className={matchStatusClass}>{matchStatus}</p>
     </li>
   )
 }
